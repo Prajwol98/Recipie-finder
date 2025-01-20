@@ -1,11 +1,9 @@
-import Items from "./components/Items";
-import { Searchbar } from "./components/Searchbar";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <div className="container mx-auto p-4">
-      <Searchbar />
-      <Items></Items>
+      <Home></Home>
     </div>
   );
 }
