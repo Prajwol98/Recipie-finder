@@ -9,8 +9,11 @@ const Popular = () => {
         // "https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772"
       );
       const data = await api.json();
-
-      setPopular(data.categories.slice(0, 8));
+      if (Array.isArray(data.categories)) {
+        setPopular(data.categories.slice(0, 8));
+      } else {
+        console.error("Error fetching data:", data);
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
