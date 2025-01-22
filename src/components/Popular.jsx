@@ -1,13 +1,21 @@
-import React, { useEffect, useState } from "react";
+// "https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772"
+import React, { useEffect, useState, useCallback } from "react";
 
 const Popular = () => {
   const [popular, setPopular] = useState([]);
-  const getData = async () => {
+  const [error, setError] = useState(null);
+  const [loading, setIsLoading] = useState(true);
+
+  const getData = useCallback(async () => {
     try {
+      setIsLoading(true);
       const api = await fetch(
         "https://www.themealdb.com/api/json/v1/1/categories.php"
-        // "https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772"
       );
+      if (!api.ok) {
+        throw new Error("Something went wrong");
+      }
+
       const data = await api.json();
       if (Array.isArray(data.categories)) {
         setPopular(data.categories.slice(0, 8));
@@ -15,13 +23,12 @@ const Popular = () => {
         console.error("Error fetching data:", data);
       }
     } catch (error) {
-      console.error("Error fetching data:", error);
+      setError(error.message);
     }
-  };
-
+  }, []);
   useEffect(() => {
     getData();
-  }, []);
+  }, [getData]);
 
   return (
     <div>
