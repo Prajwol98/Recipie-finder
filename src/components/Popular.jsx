@@ -1,5 +1,7 @@
 // "https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772"
 import React, { useEffect, useState, useCallback } from "react";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/react-splide/css";
 
 const Popular = () => {
   const [popular, setPopular] = useState([]);
@@ -33,15 +35,21 @@ const Popular = () => {
   return (
     <div>
       <h1>Popular</h1>
-      {popular.map((items) => {
-        return (
-          <div key={items.idCategory}>
-            <h2>{items.strCategory}</h2>
-            <img src={items.strCategoryThumb} alt="img" />
-            <p>{items.strCategoryDescription}</p>
-          </div>
-        );
-      })}
+      <div className="flex ">
+        {popular.map((items) => {
+          return (
+            <div key={items.idCategory}>
+              <h2>{items.strCategory}</h2>
+              <img
+                className="w-[100%] h-[100%]  rounded-lg"
+                src={items.strCategoryThumb}
+                alt={items.strCategory}
+              />
+              {/* <p>{items.strCategoryDescription}</p> */}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

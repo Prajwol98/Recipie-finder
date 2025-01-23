@@ -6,7 +6,7 @@ const Pages = () => {
   return (
     <div>
       <Popular></Popular>
-      <Items></Items>
+      {/* <Items></Items> */}
     </div>
   );
 };
