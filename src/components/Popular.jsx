@@ -8,9 +8,24 @@ const Popular = () => {
   const [error, setError] = useState(null);
   const [loading, setIsLoading] = useState(true);
 
+  const checkLocalStorage = () => {
+    const data = localStorage.getItem("popular");
+    return data ? JSON.parse(data) : null;
+  };
+
+  const saveToLocalStorage = (data) => {
+    localStorage.setItem("popular", JSON.stringify(data));
+  };
+
   const getData = useCallback(async () => {
     try {
       setIsLoading(true);
+      const localData = checkLocalStorage();
+      if (localData.length > 0) {
+        setPopular(localData.slice(0, 8));
+        setIsLoading(false);
+        return;
+      }
       const api = await fetch(
         "https://www.themealdb.com/api/json/v1/1/categories.php"
       );
@@ -20,6 +35,7 @@ const Popular = () => {
 
       const data = await api.json();
       if (Array.isArray(data.categories)) {
+        saveToLocalStorage(data.categories);
         setPopular(data.categories.slice(0, 8));
         console.log(data);
       } else {
@@ -27,6 +43,8 @@ const Popular = () => {
       }
     } catch (error) {
       setError(error.message);
+    } finally {
+      setIsLoading(false);
     }
   }, []);
   useEffect(() => {
@@ -36,6 +54,9 @@ const Popular = () => {
   return (
     <div>
       <h1 className="font-bold text-2xl text-center">Popular</h1>
+      {error && <p className="text-red-500 text-center">{error}</p>}
+
+      {loading && <p className="text-center">Loading...</p>}
       <div className="md:flex ">
         <Splide
           options={{
