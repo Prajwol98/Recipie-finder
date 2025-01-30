@@ -35,8 +35,8 @@ const Popular = () => {
 
   return (
     <div>
-      <h1>Popular</h1>
-      <div className="flex ">
+      <h1 className="font-bold text-2xl text-center">Popular</h1>
+      <div className="md:flex ">
         <Splide
           options={{
             type: "loop",
@@ -46,32 +46,27 @@ const Popular = () => {
             autoplay: true,
             drag: "free",
             pagination: true,
+            breakpoints: {
+              640: {
+                perPage: 3,
+                gap: "0.5rem",
+              },
+              480: {
+                perPage: 2,
+                gap: "0.5rem",
+              },
+            },
           }}
         >
-          {/* {popular.map((items) => {
-            return (
-              <SplideSlide key={items.idCategory}>
-                <div className="min-h-[15rem] relative">
-                  <h2 className="absolute z-10 bottom-0 left-0 text-white bg-gradient-to-t from-black/50 w-full p-2">
-                    {items.strCategory}
-                  </h2>
-                  <img
-                    className="rounded-lg absolute left-0 w-full h-full object-cover"
-                    src={items.strCategoryThumb}
-                    alt={items.strCategory}
-                    ø
-                  />
-                </div>
-              </SplideSlide>
-            );
-          })} */}
-
           {popular.map((items) => {
             return (
               <SplideSlide key={items.idCategory}>
                 <div>
-                  <h2>{items.strCategory}</h2>
+                  <h2 className=" absolute bottom-2 left-14 md:left-24  bg-black text-white rounded-md p-2 text-center z-10">
+                    {items.strCategory}
+                  </h2>
                   <img
+                    className="relative"
                     src={items.strCategoryThumb}
                     alt={items.strCategoryThumb}
                   />
