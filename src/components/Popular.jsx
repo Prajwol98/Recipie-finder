@@ -53,7 +53,7 @@ const Popular = () => {
 
   return (
     <div>
-      <h1 className="font-bold text-2xl text-center">Popular</h1>
+      <h1 className="font-bold text-2xl text-center">Popular picks</h1>
       {error && <p className="text-red-500 text-center">{error}</p>}
 
       {loading && <p className="text-center">Loading...</p>}
