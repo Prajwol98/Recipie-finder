@@ -10,7 +10,7 @@ const Popular = () => {
 
   const checkLocalStorage = () => {
     const data = localStorage.getItem("popular");
-    return data ? JSON.parse(data) : null;
+    return data ? JSON.parse(data) : [];
   };
 
   const saveToLocalStorage = (data) => {
@@ -28,6 +28,7 @@ const Popular = () => {
       }
       const api = await fetch(
         "https://www.themealdb.com/api/json/v1/1/categories.php"
+        // "https://www.themealdb.com/api/json/v1/1/random.php"
       );
       if (!api.ok) {
         throw new Error("Something went wrong");
@@ -53,7 +54,7 @@ const Popular = () => {
 
   return (
     <div>
-      <h1 className="font-bold text-2xl text-center">Popular picks</h1>
+      <h1 className="font-bold text-2xl text-center">Trending</h1>
       {error && <p className="text-red-500 text-center">{error}</p>}
 
       {loading && <p className="text-center">Loading...</p>}
@@ -61,15 +62,15 @@ const Popular = () => {
         <Splide
           options={{
             type: "loop",
-            perPage: 4,
+            perPage: 3,
             gap: "1rem",
-            pagination: false,
+            // pagination: false,
             autoplay: true,
             drag: "free",
             pagination: true,
             breakpoints: {
               640: {
-                perPage: 3,
+                perPage: 2,
                 gap: "0.5rem",
               },
               480: {
