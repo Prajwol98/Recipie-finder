@@ -1,9 +1,8 @@
-// "https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772"
 import React, { useEffect, useState, useCallback } from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 
-const Popular = () => {
+const Items = () => {
   const [items, setItems] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setIsLoading] = useState(true);
@@ -34,9 +33,9 @@ const Popular = () => {
       }
 
       const data = await api.json();
-      if (Array.isArray(data.categories)) {
-        saveToLocalStorage(data.categories);
-        setItems(data.categories.slice(0, 8));
+      if (Array.isArray(data.meals)) {
+        saveToLocalStorage(data.meals);
+        setItems(data.meals.slice(0, 8));
         console.log(data);
       } else {
         console.error("Error fetching data:", data);
@@ -53,7 +52,7 @@ const Popular = () => {
 
   return (
     <div>
-      <h1 className="font-bold text-2xl text-center">Trending</h1>
+      <h1 className="font-bold text-2xl text-center">Trending Vegetarian</h1>
       {error && <p className="text-red-500 text-center">{error}</p>}
 
       {loading && <p className="text-center">Loading...</p>}
@@ -61,7 +60,7 @@ const Popular = () => {
         <Splide
           options={{
             type: "loop",
-            perPage: 3,
+            perPage: 4,
             gap: "1rem",
             autoplay: true,
             drag: "free",
@@ -78,17 +77,17 @@ const Popular = () => {
             },
           }}
         >
-          {items.map((items) => {
+          {items.map((item) => {
             return (
-              <SplideSlide key={items.idMeal}>
-                <div>
-                  <h2 className=" absolute bottom-2 left-14 md:left-24  bg-black text-white rounded-md p-2 text-center z-10">
-                    {items.strMeal}
+              <SplideSlide key={item.idMeal}>
+                <div className="relative rounded-lg overflow-hidden">
+                  <h2 className="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-black/75 text-white rounded-md p-2 text-center z-10">
+                    {item.strMeal}
                   </h2>
                   <img
-                    className="relative"
-                    src={items.strMealThumb}
-                    // alt={items.strCategoryThumb}
+                    className="w-full h-64 object-cover"
+                    src={item.strMealThumb}
+                    alt={item.strMeal}
                   />
                 </div>
               </SplideSlide>
@@ -100,4 +99,4 @@ const Popular = () => {
   );
 };
 
-export default Popular;
+export default Items;

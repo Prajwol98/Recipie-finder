@@ -64,7 +64,6 @@ const Popular = () => {
             type: "loop",
             perPage: 3,
             gap: "1rem",
-            // pagination: false,
             autoplay: true,
             drag: "free",
             pagination: true,
@@ -83,12 +82,12 @@ const Popular = () => {
           {popular.map((items) => {
             return (
               <SplideSlide key={items.idCategory}>
-                <div>
-                  <h2 className=" absolute bottom-2 left-14 md:left-24  bg-black text-white rounded-md p-2 text-center z-10">
+                <div className="relative rounded-lg overflow-hidden ">
+                  <h2 className=" absolute bottom-2 left-1/2 transf0rm -translate-x-1/2 text-white bg-black  p-2 z-10 rounded-md">
                     {items.strCategory}
                   </h2>
                   <img
-                    className="relative"
+                    className="w-full h-64 object-cover"
                     src={items.strCategoryThumb}
                     alt={items.strCategoryThumb}
                   />
