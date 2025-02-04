@@ -51,7 +51,7 @@ const Items = () => {
   }, [getData]);
 
   return (
-    <div>
+    <div className="mt-10">
       <h1 className="font-bold text-2xl text-center">Trending Vegetarian</h1>
       {error && <p className="text-red-500 text-center">{error}</p>}
 
