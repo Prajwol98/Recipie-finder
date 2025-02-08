@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 
@@ -22,8 +22,13 @@ const Popular = () => {
   };
 
   const checkLocalStorage = () => {
-    const data = localStorage.getItem("popular");
-    return data ? JSON.parse(data) : [];
+    try {
+      const data = localStorage.getItem("popular");
+      return data ? JSON.parse(data) : [];
+    } catch (e) {
+      console.error("Error reading from localStorage", e);
+      return [];
+    }
   };
 
   const saveToLocalStorage = (data) => {
@@ -53,7 +58,7 @@ const Popular = () => {
         setPopular(data.categories.slice(0, 8));
         console.log(data);
       } else {
-        console.error("Error fetching data:", data);
+        throw new Error("Error fetching data");
       }
     } catch (error) {
       setError(error.message);
@@ -144,7 +149,8 @@ const Popular = () => {
             {/* Modal Body */}
             <div className="p-4 space-y-4">
               <p className="text-gray-500">
-                Description of {selectedItem.strCategory}...
+                {selectedItem.strCategoryDescription ||
+                  `Description of ${selectedItem.strCategory}...`}
               </p>
             </div>
 
