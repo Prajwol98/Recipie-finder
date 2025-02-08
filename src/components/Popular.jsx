@@ -148,6 +148,10 @@ const Popular = () => {
 
             {/* Modal Body */}
             <div className="p-4 space-y-4">
+              <img
+                src={selectedItem.strCategoryThumb}
+                alt={selectedItem.strCategoryThumb}
+              />
               <p className="text-gray-500">
                 {selectedItem.strCategoryDescription ||
                   `Description of ${selectedItem.strCategory}...`}
