@@ -47,14 +47,16 @@ const Searchbar = () => {
 
       <div>
         {results.length > 0 ? (
-          <div className="space-y-2">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 border-none ">
             {results.map((meal) => (
-              <li key={meal.idMeal} className="p-2 border rounded-lg shadow-sm">
-                <div className="flex flex-col items-center space-y-2">
-                  <h2>{meal.strMeal}</h2>
-                  <img src={meal.strMealThumb} alt={meal.strMealThumb} />
-                </div>
-              </li>
+              <div key={meal.idMeal}>
+                <h2>{meal.strMeal}</h2>
+                <img
+                  src={meal.strMealThumb}
+                  alt={meal.strMealThumb}
+                  className="w-full h-48 object-cover rounded-lg"
+                />
+              </div>
             ))}
           </div>
         ) : null}
