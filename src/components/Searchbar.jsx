@@ -33,7 +33,7 @@ const Searchbar = () => {
         <input
           type="text"
           placeholder="Enter your meal name"
-          className="w-1/3 p-2 border-2 border-gray-300 rounded-lg outline-none"
+          className="w-full p-2 border-2 border-gray-300 rounded-lg outline-none"
           value={search}
           onChange={handleChange}
         />
@@ -45,18 +45,19 @@ const Searchbar = () => {
         </button>
       </div>
 
-      <div className="w-1/2">
+      <div>
         {results.length > 0 ? (
-          <ul className="space-y-2">
+          <div className="space-y-2">
             {results.map((meal) => (
               <li key={meal.idMeal} className="p-2 border rounded-lg shadow-sm">
-                {meal.strMeal}
+                <div className="flex flex-col items-center space-y-2">
+                  <h2>{meal.strMeal}</h2>
+                  <img src={meal.strMealThumb} alt={meal.strMealThumb} />
+                </div>
               </li>
             ))}
-          </ul>
-        ) : (
-          search && <p className="text-gray-500">No results found.</p>
-        )}
+          </div>
+        ) : null}
       </div>
     </div>
   );
