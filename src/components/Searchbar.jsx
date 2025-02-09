@@ -29,11 +29,11 @@ const Searchbar = () => {
 
   return (
     <div className="flex flex-col items-center p-4 space-y-4">
-      <div className="flex justify-center items-center space-x-4">
+      <div className="flex justify-center space-x-4">
         <input
           type="text"
           placeholder="Enter your meal name"
-          className="w-full p-2 border-2 border-gray-300 rounded-lg outline-none"
+          className="w-1/3 p-2 border-2 border-gray-300 rounded-lg outline-none"
           value={search}
           onChange={handleChange}
         />
@@ -49,12 +49,12 @@ const Searchbar = () => {
         {results.length > 0 ? (
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 border-none ">
             {results.map((meal) => (
-              <div key={meal.idMeal}>
-                <h2>{meal.strMeal}</h2>
+              <div key={meal.idMeal} className="relative overflow-hidden">
+                <h2 className="absolute z-10 bottom-0">{meal.strMeal}</h2>
                 <img
                   src={meal.strMealThumb}
                   alt={meal.strMealThumb}
-                  className="w-full h-48 object-cover rounded-lg"
+                  className=" w-full h-48 object-cover rounded-lg"
                 />
               </div>
             ))}
